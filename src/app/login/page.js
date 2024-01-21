@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoginInProgress(true);
-    await signIn("credentials", { email, password });
+    await signIn("credentials", { email, password, callbackUrl: "/" });
     setLoginInProgress(false);
   };
 
@@ -42,7 +42,10 @@ export default function LoginPage() {
         <div className="my-4 text-center text-gray-500">
           or Login with provider
         </div>
-        <button className="flex gap-4 justify-center">
+        <button
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="flex gap-4 justify-center"
+        >
           <Image src={"/google.png"} alt={""} width={24} height={24} />
           Login with Google
         </button>
