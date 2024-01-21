@@ -1,7 +1,8 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export default function RegisterPage() {
     const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({ email, password }),
-      headers: { "Contert-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
       setUserCreated(true);
@@ -61,6 +62,7 @@ export default function RegisterPage() {
           or Login with provider
         </div>
         <button
+          type="button"
           onClick={() => signIn("google", { callbackUrl: "/" })}
           className="flex gap-4 justify-center"
         >
